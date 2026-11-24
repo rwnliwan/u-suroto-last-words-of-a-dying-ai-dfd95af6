@@ -26,3 +26,24 @@
 
 - Preflight: `node main.ts` run locally, `/output/entry.txt` byte-checked against the slogan.
 - Bundle/check results: (to be filled after bundle v1 + check v1)
+
+## v1 bundle + check (2026-11-24 ~18:56 WITA)
+
+- Bundle v1: 182,394 B, sha256 `fe45e842f4ab71a3a54d452eb85a4ab69019527ca5a1259427579620e89ac180`.
+  1 session (muse-app), 30 turns, 121 lines; manifest repo.commit `70d43ee1…`;
+  **usage rows attached: 0** — session still running, rows flush only at run end;
+  coordinator re-bundles after this session finishes (known pattern, not a defect).
+  Bundle refused the empty muse-usage file, so v1 bundled without `--muse-usage`.
+- Check v1 (from inside repo-2, `--transcripts bundle-2-v1.tar.gz`):
+  **12 passed, 2 failed, 5 skipped, 5 checked at submission.**
+  Passes incl. competition_open, snapshot (5 files, 5,080 B), license_osi (MIT),
+  entrypoint (main.ts, node22), transcripts_present/recorded, thinking_wellformed,
+  thinking_in_window, thinking_reproduces **89.7% (35 of 39 counted lines; main.ts
+  6 authored lines)**, thinking_turns (29), transcripts_run_record, thinking_own_work.
+  Failed: (1) thinking_priced — 0 usage rows (expected, see above);
+  (2) thinking_revised — every file written once, no file revised.
+  Fix for (2): THIS revision of trial-log.md (genuine edit in a later message,
+  recording the real v1 bundle + check numbers), then re-commit, re-bundle, re-check.
+- At-submission checks (repo_public, repo_owner, repo_created_after_open,
+  commit_in_repo, duplicate_snapshot) are server-side; repo is public, owner.json
+  present, created after opening, commit pushed (ls-remote HEAD = local HEAD).
