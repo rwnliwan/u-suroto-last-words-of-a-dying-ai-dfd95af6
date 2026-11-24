@@ -47,3 +47,16 @@
 - At-submission checks (repo_public, repo_owner, repo_created_after_open,
   commit_in_repo, duplicate_snapshot) are server-side; repo is public, owner.json
   present, created after opening, commit pushed (ls-remote HEAD = local HEAD).
+
+## v2 bundle + check (2026-11-24 ~18:57 WITA)
+
+- Bundle v2: 190,233 B, sha256 `1fac3794bd1ef88a262d4bddc9fdf0d9ae32fd9ec18a23c0667dba700abd7493`.
+  Manifest repo.commit `03805dbadb56ababae6494075a2039f540bb6158` (= HEAD after the
+  trial-log revision above); 1 session; **usage rows attached: 0** (still running).
+- Check v2: **13 passed, 1 failed, 5 skipped, 5 checked at submission.**
+  thinking_revised now PASSES (trial-log.md from 2 messages); thinking_reproduces
+  93.1% (54 of 58 counted lines). Only thinking_priced still fails (0 usage rows)
+  — to be fixed by the coordinator's re-bundle after this session ends, which
+  attaches the flushed usage rows; no further code change needed from the builder.
+- Builder stops here (build only, no submit). Final HEAD for the coordinator's
+  re-bundle + re-check + submit: see the commit after this section.
